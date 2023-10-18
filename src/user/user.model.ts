@@ -1,8 +1,18 @@
 import { InjectRepository } from '@nestjs/typeorm';
-import { Column, CreateDateColumn, Entity, PrimaryColumn, PrimaryGeneratedColumn, Repository } from 'typeorm';
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	OneToMany,
+	PrimaryColumn,
+	PrimaryGeneratedColumn,
+	Repository,
+} from 'typeorm';
 import { UserCreateDto } from './dto/user-create.dto';
 import { UserUpdateDto } from './dto/user-update.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { Tasks } from 'src/task/task.model';
+import { Injectable } from '@nestjs/common';
 
 @Entity()
 export class Users {
@@ -11,18 +21,22 @@ export class Users {
 	id: number;
 
 	@ApiProperty({ example: 'mazay', description: 'Username' })
-	@PrimaryColumn()
+	@Column()
 	username: string;
 
 	@ApiProperty({ example: '1234', description: 'Password' })
 	@Column()
 	password: string;
 
+	@OneToMany((type) => Tasks, (tast) => tast.user)
+	tasks: Tasks[];
+
 	@ApiProperty({ example: '2023-10-18T08:23:15.653Z', description: 'Date created' })
 	@CreateDateColumn()
 	createAt: Date;
 }
 
+@Injectable()
 export class UserModel {
 	constructor(@InjectRepository(Users) private user: Repository<Users>) {}
 

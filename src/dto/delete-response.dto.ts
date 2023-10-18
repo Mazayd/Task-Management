@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class UserResponseDto {
+export class DeleteResponseDto {
 	@ApiProperty({ example: [] })
 	readonly raw: [];
 	@ApiProperty({ example: 1 })
