@@ -1,10 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Users } from './user/user.model';
-import { UserModule } from './user/user.module';
-import { Tasks } from './task/task.model';
-import { TaskModule } from './task/task.module';
 
 @Module({
 	imports: [
@@ -16,11 +12,9 @@ import { TaskModule } from './task/task.module';
 			username: process.env.POSTGRES_USER,
 			password: process.env.POSTGRES_PASSWORD,
 			database: process.env.POSTGRES_DB,
-			entities: [Users, Tasks],
+			entities: [],
 			synchronize: true,
 		}),
-		UserModule,
-		TaskModule,
 	],
 	controllers: [],
 	providers: [],
