@@ -10,6 +10,7 @@ async function bootstrap() {
 		.setDescription('Description of the pet project API: Task management.')
 		.setVersion('1.0')
 		.addTag('mazay_daddy')
+		.addBearerAuth()
 		.build();
 	const document = SwaggerModule.createDocument(app, config);
 	SwaggerModule.setup('api', app, document);
