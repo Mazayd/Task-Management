@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { UserRole } from 'src/user-roles/entities/user-role.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Users {
@@ -18,4 +19,8 @@ export class Users {
 	@ApiProperty({ example: '2023-10-18T08:23:15.653Z', description: 'Date created' })
 	@Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
 	createAt: Date;
+
+	@ApiProperty({ example: 1, description: 'User role id' })
+	@ManyToOne((type) => UserRole, (userRole) => userRole.users)
+	role: UserRole;
 }
