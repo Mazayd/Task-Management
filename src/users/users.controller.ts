@@ -2,11 +2,12 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, HttpException, HttpS
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Users } from './entities/user.entity';
 import { UpdateResponseDto } from 'src/dto/update-response.dto';
 import { DeleteResponseDto } from 'src/dto/delete-response.dto';
 
+@ApiTags('User')
 @Controller('users')
 export class UsersController {
 	constructor(private readonly usersService: UsersService) {}
@@ -25,9 +26,6 @@ export class UsersController {
 	@Get()
 	async findAll() {
 		const result = await this.usersService.findAll();
-		if (!result) {
-			throw new HttpException('Users not found', HttpStatus.NOT_FOUND);
-		}
 		return result;
 	}
 

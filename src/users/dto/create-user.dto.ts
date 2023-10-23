@@ -6,4 +6,7 @@ export class CreateUserDto {
 
 	@ApiProperty({ example: '1234', description: 'Password' })
 	readonly password: string;
+
+	@ApiProperty({ example: 'User', description: 'User role' })
+	readonly role?: string;
 }
